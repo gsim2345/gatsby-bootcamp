@@ -4,7 +4,7 @@ const ContactPage = () => {
     return (
         <div>
             <h1>Contact</h1>
-            <p>The best way to reach me is via my email adress: ________</p>
+            <p>The best way to reach me is via my email adress: <a href="https://google.com" target='_blank'>________</a></p>
         </div>
     )
 }
