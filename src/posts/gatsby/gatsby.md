@@ -5,6 +5,8 @@ date: '2019-08-26'
 
 I just launched a new Bootcamp!
 
+![Leaves](./tropical-green.jpg)
+
 ## Topics covered
 
 1. Gatsby
