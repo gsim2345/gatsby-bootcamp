@@ -1,5 +1,7 @@
 const path = require('path');
 
+// we use to generate slugs, using contentful we don't need it anymore , we generate it there
+/*
 module.exports.onCreateNode = ({ node, actions }) => {
     const { createNodeField } = actions
     // Transform the new node here and create a new node or
@@ -21,6 +23,7 @@ module.exports.onCreateNode = ({ node, actions }) => {
     }
     
   }
+  */
 
 module.exports.createPages = async ({graphql, actions}) => {
     const { createPage } = actions;
@@ -30,6 +33,7 @@ module.exports.createPages = async ({graphql, actions}) => {
     //path.resolve() creates an absolute path 
 
 
+    /* 
     // 2. Get markdown data
     // this graphql function is not the same as the one coming from Gatsby This function returns a promise. 
     const res = await graphql(`
@@ -44,14 +48,38 @@ module.exports.createPages = async ({graphql, actions}) => {
                 }
             }
         }
-    `);
+    `); */
+    // Instead of markdown data, we need the contentful data
+    const res = await graphql(`
+        query {
+            allContentfulBlogPost {
+                edges {
+                    node {
+                        slug
+                    }
+                }
+            }
+        }
+    `); 
+
+
     // 3. Create new pages
+    /*
     res.data.allMarkdownRemark.edges.forEach((edge) => {
         createPage({
             component: blogTemplate,
             path: `/blog/${edge.node.fields.slug}`,
             context: {
                 slug: edge.node.fields.slug
+            }
+        })
+    });*/
+    res.data.allContentfulBlogPost.edges.forEach((edge) => {
+        createPage({
+            component: blogTemplate,
+            path: `/blog/${edge.node.slug}`,
+            context: {
+                slug: edge.node.slug
             }
         })
     });
